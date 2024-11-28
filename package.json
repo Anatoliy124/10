@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test:staging": "your-staging-test-command"
+    "test": "jest"
   },
   "repository": {
     "type": "git",
