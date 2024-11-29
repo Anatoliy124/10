@@ -24,25 +24,13 @@ jobs:
       - name: List directory contents
         run: ls -la
 
-      - name: Print absolute path of files
-        run: find $PWD -type f
-
-      - name: Set up Node.js
-        uses: actions/setup-node@v3
-        with:
-          node-version: ${{ env.NODE_VERSION }}
-
       - name: Install dependencies
         run: npm install
-        working-directory: ./Desktop/cicd-3-laba
-
-      - name: Run npm audit
-        run: npm audit
-        working-directory: ./Desktop/cicd-3-laba
+        working-directory: ./cicd-3-laba
 
       - name: Run tests
         run: npm test
-        working-directory: ./Desktop/cicd-3-laba
+        working-directory: ./cicd-3-laba
 
   deploy:
     runs-on: ubuntu-latest
@@ -51,15 +39,6 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
 
-      - name: Print current directory
-        run: pwd
-
-      - name: List directory contents
-        run: ls -la
-
-      - name: Print absolute path of files
-        run: find $PWD -type f
-
       - name: Set up Node.js
         uses: actions/setup-node@v3
         with:
@@ -67,6 +46,6 @@ jobs:
 
       - name: Deploy application
         run: npm run deploy -- --version $BUILD_VERSION
-        working-directory: ./Desktop/cicd-3-laba
+        working-directory: ./cicd-3-laba
         env:
           BUILD_VERSION: ${{ github.run_number }}
