@@ -10,15 +10,15 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Anatoliy124.git"
+    "url": "git+https://github.com/Anatoliy124/10.git"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/Anatoliy124/issues"
+    "url": "https://github.com/Anatoliy124/10/issues"
   },
-  "homepage": "https://github.com/Anatoliy124#readme",
+  "homepage": "https://github.com/Anatoliy124/10#readme",
   "devDependencies": {
     "jest": "^29.7.0"
   }
