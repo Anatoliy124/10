@@ -12,13 +12,14 @@ jobs:
         run: git clone https://github.com/Anatoliy124/10.git
         # Плохая практика 2: Установка без использования actions/checkout
 
-      # 2. Плохая практика: Необоснованное использование старой версии Node.js
+      # 2. Плохая практика: Использование устаревшего способа установки Node.js
       - name: Install Node.js
         run: |
-          curl -fsSL https://deb.nodesource.com/setup_10.x | sudo -E bash -
+          curl -fsSL https://deb.nodesource.com/setup_14.x | sudo -E bash -
           sudo apt-get install -y nodejs
+        # Несмотря на переход на Node.js 14, мы всё ещё используем неактуальный способ установки.
 
-      # 3. Плохая практика: Отсутствие кэширования зависимостей
+      # 3. Плохая практика: Нет кэширования зависимостей
       - name: Install dependencies
         run: npm install
         working-directory: ./10  # Неправильное использование директории: ручная настройка
