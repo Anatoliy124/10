@@ -15,24 +15,20 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      # Шаг 1: Клонируем репозиторий
       - name: Checkout code
         uses: actions/checkout@v3
 
-      # Шаг 2: Отладка структуры директорий
       - name: Debug working directory
         run: pwd
 
       - name: List project files
         run: ls -la
 
-      # Шаг 3: Устанавливаем Node.js
       - name: Set up Node.js
         uses: actions/setup-node@v3
         with:
           node-version: ${{ env.NODE_VERSION }}
 
-      # Шаг 4: Кэширование модулей Node.js
       - name: Cache Node.js modules
         uses: actions/cache@v3
         with:
@@ -41,14 +37,10 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-node-
 
-      # Шаг 5: Устанавливаем зависимости
       - name: Install dependencies
-        working-directory: 10
         run: npm ci
 
-      # Шаг 6: Запуск тестов
       - name: Run tests
-        working-directory: 10
         run: npm test
 
   staging:
@@ -78,11 +70,9 @@ jobs:
             ${{ runner.os }}-node-
 
       - name: Install dependencies
-        working-directory: 10
         run: npm ci
 
       - name: Run staging tests
-        working-directory: 10
         run: npm run test:staging
 
   deploy:
@@ -112,7 +102,6 @@ jobs:
             ${{ runner.os }}-node-
 
       - name: Deploy application
-        working-directory: 10
         run: npm run deploy -- --version $BUILD_VERSION
         env:
           BUILD_VERSION: ${{ github.run_number }}
