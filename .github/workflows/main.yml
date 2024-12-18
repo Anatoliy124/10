@@ -1,22 +1,33 @@
 name: Bad CI/CD Pipeline
 
-on: [push]
+on: push  # Плохая практика 1: Нет обработки pull_request или других событий
 
 jobs:
   build:
     runs-on: ubuntu-latest
+
     steps:
-      - name: Install Node.js
-        run: sudo apt-get install -y nodejs npm
-
-      - name: Checkout code
+      # 1. Плохая практика: Отсутствие авторизации
+      - name: Clone repository manually
         run: git clone https://github.com/Anatoliy124/10.git
+        # Плохая практика 2: Установка без использования actions/checkout
 
+      # 2. Плохая практика: Необоснованное использование старой версии Node.js
+      - name: Install Node.js
+        run: |
+          curl -fsSL https://deb.nodesource.com/setup_10.x | sudo -E bash -
+          sudo apt-get install -y nodejs
+
+      # 3. Плохая практика: Отсутствие кэширования зависимостей
       - name: Install dependencies
         run: npm install
+        working-directory: ./10  # Неправильное использование директории: ручная настройка
 
+      # 4. Плохая практика: Тесты выполняются без вывода логов
       - name: Run tests
         run: npm test
+        working-directory: ./10
 
-      - name: Deploy to production
-        run: echo "Deploying to production"
+      # 5. Плохая практика: Непонятные имена шагов
+      - name: Final script
+        run: echo "Build complete!"
