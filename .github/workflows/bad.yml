@@ -1,0 +1,34 @@
+name: Bad CI/CD Pipeline
+
+on: push
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      # 1. Плохая практика: Клонирование репозитория вручную вместо actions/checkout
+      - name: Clone repository manually
+        run: git clone https://github.com/Anatoliy124/10.git
+        working-directory: ./
+
+      # 2. Плохая практика: Использование устаревшего способа установки Node.js
+      - name: Set up Node.js (Bad Practice)
+        uses: actions/setup-node@v3
+        with:
+          node-version: '14'
+        # Теперь используется actions/setup-node, но остаются другие "плохие" практики
+
+      # 3. Плохая практика: Нет кэширования зависимостей
+      - name: Install dependencies without caching
+        run: npm install
+        working-directory: ./10
+
+      # 4. Плохая практика: Тесты выполняются без обработки результатов
+      - name: Run tests
+        run: npm test
+        working-directory: ./10
+
+      # 5. Плохая практика: Неясные названия шагов
+      - name: Echo success message
+        run: echo "Build complete!"
