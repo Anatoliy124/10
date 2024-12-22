@@ -103,6 +103,6 @@ name: Deploy application
    вау, мы используем понятный нэименг, теперь все понятно.
 
 ## "Good" practies(нормальные мужики внатуре)
-![IMG_9392](goodPractice.jpg)
+![IMG_9392](Screenshot from 2024-12-22 18-13-35.png)
 
 
